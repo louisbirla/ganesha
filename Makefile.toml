@@ -1,0 +1,31 @@
+env_files = [
+	"./.env",
+]
+
+[config]
+default_to_workspace = false
+
+[tasks.format]
+install_crate = "rustfmt"
+command = "cargo"
+args = ["fmt"]
+
+[tasks.lint]
+install_crate = "clippy"
+command = "cargo"
+args = ["clippy"]
+
+[tasks.pre-commit]
+dependencies = [
+	"format",
+	"lint",
+]
+
+[tasks.run]
+command = "cargo"
+args = ["run"]
+
+[tasks.dev]
+watch = { watch = ["./ganesha-api/"] }
+command = "cargo"
+args = ["run"]
